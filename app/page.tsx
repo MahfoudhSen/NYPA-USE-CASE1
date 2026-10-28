@@ -128,14 +128,14 @@ export default function UseCase1Page() {
     const latest = fuelMixData[fuelMixData.length - 1];
 
     return [
-      { name: 'Natural Gas', value: latest.natural_gas, color: '#fbbf24' },
-      { name: 'Nuclear', value: latest.nuclear, color: '#8b5cf6' },
-      { name: 'Hydro', value: latest.hydro, color: '#3b82f6' },
-      { name: 'Wind', value: latest.wind, color: '#10b981' },
-      { name: 'Solar', value: latest.solar, color: '#f59e0b' },
-      { name: 'Dual Fuel', value: latest.dual_fuel, color: '#ef4444' },
-      { name: 'Other Renewables', value: latest.other_renewables, color: '#22c55e' },
-      { name: 'Other Fossil', value: latest.other_fossil_fuels, color: '#6b7280' },
+      { name: 'Natural Gas', value: latest.natural_gas, color: '#aaa' },
+      { name: 'Nuclear', value: latest.nuclear, color: '#777' },
+      { name: 'Hydro', value: latest.hydro, color: '#666' },
+      { name: 'Wind', value: latest.wind, color: '#999' },
+      { name: 'Solar', value: latest.solar, color: '#bbb' },
+      { name: 'Dual Fuel', value: latest.dual_fuel, color: '#fff' },
+      { name: 'Other Renewables', value: latest.other_renewables, color: '#888' },
+      { name: 'Other Fossil', value: latest.other_fossil_fuels, color: '#555' },
     ].filter((item) => item.value > 0);
   }, [fuelMixData]);
 
@@ -144,21 +144,21 @@ export default function UseCase1Page() {
     const clean = emissionsData.filter((r) => r.isClean).length;
     const dirty = emissionsData.length - clean;
     return [
-      { name: 'Clean Hours (>60% clean energy)', value: clean, color: '#22c55e' },
-      { name: 'Dirty Hours (<60% clean energy)', value: dirty, color: '#ef4444' },
+      { name: 'Clean Hours (>60% clean energy)', value: clean, color: '#888' },
+      { name: 'Dirty Hours (<60% clean energy)', value: dirty, color: '#fff' },
     ];
   }, [emissionsData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-8">
+    <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2 flex items-center gap-3">
-            <Zap className="w-10 h-10 text-yellow-400" />
+            <Zap className="w-10 h-10 text-white" />
             NYISO/NYPA Real-Time Energy Emission Profiler
           </h1>
-          <p className="text-slate-300 text-lg">
+          <p className="text-gray-400 text-lg">
             Monitor energy emissions trends and clean vs. dirty hour comparisons for New York State
           </p>
         </div>
@@ -168,89 +168,89 @@ export default function UseCase1Page() {
           <select
             value={dateRange}
             onChange={(e) => setDateRange(Number(e.target.value))}
-            className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2"
+            className="bg-white/10 border border-white/30 rounded-lg px-4 py-2 text-white"
           >
-            <option value={7}>Last 7 days</option>
-            <option value={30}>Last 30 days</option>
-            <option value={90}>Last 90 days</option>
+            <option value={7} className="bg-black">Last 7 days</option>
+            <option value={30} className="bg-black">Last 30 days</option>
+            <option value={90} className="bg-black">Last 90 days</option>
           </select>
 
           <select
             value={selectedMetric}
             onChange={(e) => setSelectedMetric(e.target.value as 'emissions' | 'generation')}
-            className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2"
+            className="bg-white/10 border border-white/30 rounded-lg px-4 py-2 text-white"
           >
-            <option value="emissions">Emissions View</option>
-            <option value="generation">Generation View</option>
+            <option value="emissions" className="bg-black">Emissions View</option>
+            <option value="generation" className="bg-black">Generation View</option>
           </select>
         </div>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+          <div className="bg-white/5 border border-white/20 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-slate-400 text-sm font-medium">Day-over-Day</h3>
+              <h3 className="text-gray-400 text-sm font-medium">Day-over-Day</h3>
               {trends.dayOverDay > 0 ? (
-                <TrendingUp className="w-5 h-5 text-red-400" />
+                <TrendingUp className="w-5 h-5 text-white" />
               ) : (
-                <TrendingDown className="w-5 h-5 text-green-400" />
+                <TrendingDown className="w-5 h-5 text-white" />
               )}
             </div>
-            <p className={`text-3xl font-bold ${trends.dayOverDay > 0 ? 'text-red-400' : 'text-green-400'}`}>
+            <p className={`text-3xl font-bold ${trends.dayOverDay > 0 ? 'text-white' : 'text-white'}`}>
               {trends.dayOverDay.toFixed(1)}%
             </p>
-            <p className="text-slate-400 text-sm mt-1">Emissions change</p>
+            <p className="text-gray-400 text-sm mt-1">Emissions change</p>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+          <div className="bg-white/5 border border-white/20 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-slate-400 text-sm font-medium">Week-over-Week</h3>
+              <h3 className="text-gray-400 text-sm font-medium">Week-over-Week</h3>
               {trends.weekOverWeek > 0 ? (
-                <TrendingUp className="w-5 h-5 text-red-400" />
+                <TrendingUp className="w-5 h-5 text-white" />
               ) : (
-                <TrendingDown className="w-5 h-5 text-green-400" />
+                <TrendingDown className="w-5 h-5 text-white" />
               )}
             </div>
-            <p className={`text-3xl font-bold ${trends.weekOverWeek > 0 ? 'text-red-400' : 'text-green-400'}`}>
+            <p className={`text-3xl font-bold ${trends.weekOverWeek > 0 ? 'text-white' : 'text-white'}`}>
               {trends.weekOverWeek.toFixed(1)}%
             </p>
-            <p className="text-slate-400 text-sm mt-1">Emissions change</p>
+            <p className="text-gray-400 text-sm mt-1">Emissions change</p>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+          <div className="bg-white/5 border border-white/20 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-slate-400 text-sm font-medium">Month-over-Month</h3>
+              <h3 className="text-gray-400 text-sm font-medium">Month-over-Month</h3>
               {trends.monthOverMonth > 0 ? (
-                <TrendingUp className="w-5 h-5 text-red-400" />
+                <TrendingUp className="w-5 h-5 text-white" />
               ) : (
-                <TrendingDown className="w-5 h-5 text-green-400" />
+                <TrendingDown className="w-5 h-5 text-white" />
               )}
             </div>
-            <p className={`text-3xl font-bold ${trends.monthOverMonth > 0 ? 'text-red-400' : 'text-green-400'}`}>
+            <p className={`text-3xl font-bold ${trends.monthOverMonth > 0 ? 'text-white' : 'text-white'}`}>
               {trends.monthOverMonth.toFixed(1)}%
             </p>
-            <p className="text-slate-400 text-sm mt-1">Emissions change</p>
+            <p className="text-gray-400 text-sm mt-1">Emissions change</p>
           </div>
         </div>
 
         {/* Emissions Trend Chart */}
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 mb-8">
+        <div className="bg-white/5 border border-white/20 rounded-xl p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Daily Emissions Trend</h2>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={dailyData}>
               <defs>
                 <linearGradient id="emissionsGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#ef4444" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#fff" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#fff" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-              <XAxis dataKey="date" stroke="#94a3b8" />
-              <YAxis stroke="#94a3b8" label={{ value: 'Metric Tons CO2', angle: -90, position: 'insideLeft' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#555" />
+              <XAxis dataKey="date" stroke="#aaa" />
+              <YAxis stroke="#aaa" label={{ value: 'Metric Tons CO2', angle: -90, position: 'insideLeft' }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                contentStyle={{ backgroundColor: '#000', border: '1px solid #fff', borderRadius: '8px' }}
               />
-              <Area type="monotone" dataKey="totalEmissions" stroke="#ef4444" fillOpacity={1} fill="url(#emissionsGradient)" />
+              <Area type="monotone" dataKey="totalEmissions" stroke="#fff" fillOpacity={1} fill="url(#emissionsGradient)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -258,7 +258,7 @@ export default function UseCase1Page() {
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Current Fuel Mix */}
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+          <div className="bg-white/5 border border-white/20 rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-4">Current Fuel Mix</h2>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -277,16 +277,16 @@ export default function UseCase1Page() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#000', border: '1px solid #fff', borderRadius: '8px' }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
           {/* Clean vs Dirty Hours */}
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+          <div className="bg-white/5 border border-white/20 rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Leaf className="w-6 h-6 text-green-400" />
+              <Leaf className="w-6 h-6 text-white" />
               Clean vs Dirty Hours
             </h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -306,40 +306,40 @@ export default function UseCase1Page() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#000', border: '1px solid #fff', borderRadius: '8px' }}
                 />
               </PieChart>
             </ResponsiveContainer>
-            <p className="text-slate-400 text-sm mt-4 text-center">
+            <p className="text-gray-400 text-sm mt-4 text-center">
               Clean hours have &gt;60% renewable/nuclear energy
             </p>
           </div>
         </div>
 
         {/* High Emissions Alerts */}
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
+        <div className="bg-white/5 border border-white/20 rounded-xl p-6">
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <AlertTriangle className="w-6 h-6 text-yellow-400" />
+            <AlertTriangle className="w-6 h-6 text-white" />
             High Emissions Alerts (Last 10)
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-700">
-                  <th className="text-left py-3 px-4 text-slate-400 font-medium">Timestamp</th>
-                  <th className="text-left py-3 px-4 text-slate-400 font-medium">Emissions (MT CO2)</th>
-                  <th className="text-left py-3 px-4 text-slate-400 font-medium">Clean Energy %</th>
-                  <th className="text-left py-3 px-4 text-slate-400 font-medium">Status</th>
+                <tr className="border-b border-white/20">
+                  <th className="text-left py-3 px-4 text-gray-400 font-medium">Timestamp</th>
+                  <th className="text-left py-3 px-4 text-gray-400 font-medium">Emissions (MT CO2)</th>
+                  <th className="text-left py-3 px-4 text-gray-400 font-medium">Clean Energy %</th>
+                  <th className="text-left py-3 px-4 text-gray-400 font-medium">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {alerts.map((alert, index) => (
-                  <tr key={index} className="border-b border-slate-700/50">
+                  <tr key={index} className="border-b border-white/20/50">
                     <td className="py-3 px-4">{format(alert.timestamp, 'MMM dd, yyyy HH:mm')}</td>
-                    <td className="py-3 px-4 text-red-400 font-semibold">{alert.emissions.toFixed(2)}</td>
+                    <td className="py-3 px-4 text-white font-semibold">{alert.emissions.toFixed(2)}</td>
                     <td className="py-3 px-4">{alert.cleanPercentage.toFixed(1)}%</td>
                     <td className="py-3 px-4">
-                      <span className="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm">
+                      <span className="bg-white/20 text-white border border-white/30 px-3 py-1 rounded-full text-sm">
                         High Alert
                       </span>
                     </td>
@@ -351,12 +351,12 @@ export default function UseCase1Page() {
         </div>
 
         {/* Emission Factors Reference */}
-        <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 mt-8">
+        <div className="bg-white/5 border border-white/20 rounded-xl p-6 mt-8">
           <h2 className="text-xl font-semibold mb-4">EPA Emission Factors (kg CO2/MWh)</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(EMISSION_FACTORS).map(([fuel, factor]) => (
-              <div key={fuel} className="bg-slate-900/50 rounded-lg p-4">
-                <p className="text-slate-400 text-sm capitalize">{fuel.replace('_', ' ')}</p>
+              <div key={fuel} className="bg-white/5 rounded-lg p-4">
+                <p className="text-gray-400 text-sm capitalize">{fuel.replace('_', ' ')}</p>
                 <p className="text-2xl font-bold">{factor}</p>
               </div>
             ))}
